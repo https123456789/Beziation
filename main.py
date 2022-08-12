@@ -12,9 +12,9 @@ def expansion(exp1, exp2, deg, mode):
             eq += " + "
     return eq if not mode else eq.split("+")
 
-def beziur(deg, points=[], precision=400):
+def bezier(deg, points=[], precision=400):
     if len(points) < deg:
-        raise "Not enough points to form beziur equation"
+        raise "Not enough points to form bezier equation"
 
     p = [Vec(x) for x in points]
     final = []
