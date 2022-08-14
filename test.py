@@ -1,25 +1,21 @@
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
-import pygame
-from pygame import Vector2 as Vec
+from time import time
+from random import randint
 from main import *
 
-pygame.init()
-win = pygame.display.set_mode((500, 500))
+iters = 10_000
 
-print(expansion("1-t", "t", 3, 1))
+gst = time()
+get = None
 
-def drawCurve(win, points, color = (255, 255, 255)):
-    for x in range(0, len(points)-1):
-        pygame.draw.line(win, color, points[x], points[x+1])
+for i in range(iters):
+    print(f"Iteration {i}...", end="")
+    st = time()
+    curve = bezier(2, [[randint(0, 100), randint(0, 100)], [randint(0, 100), randint(0, 100)], [randint(0, 100), randint(0, 100)]])
+    et = time()
+    print(f"\rIteration {i}: {(et - st)}")
 
-b = bezier(3, [(0, 0), (75, 100), (200, 100), (250, 200)])
+get = time()
 
-while True:
-    for event in pygame.event.get():
-        if event == pygame.QUIT:
-            pygame.quit()
-    
-    win.fill((0, 0, 0))
-    drawCurve(win, b)
-    pygame.display.update()
+print(f"Total time for {iters} iters: {(get - gst)}, Average: {(get - gst) / iters}")
