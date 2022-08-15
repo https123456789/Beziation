@@ -23,6 +23,10 @@ def bezier(deg, points=[], precision=400):
         newP = Vec(0, 0)
         for x in e:
             newP += eval(x)*p[e.index(x)]
+        if len(final) > 0 and (int(newP.x) != int(final[-1].x) and int(newP.y) != int(final[-1].y)):
+            final.append(newP)
+        else:
+            continue
         final.append(newP)
 
     return final
